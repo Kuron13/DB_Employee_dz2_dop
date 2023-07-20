@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS Department(
+	id_dep PRIMARY KEY NOT NULL,
+	title VARCHAR(60) UNIQUE NOT NULL
+);
+CREATE TABLE IF NOT EXISTS Employee(
+	id SERIAL PRIMARY KEY NOT NULL,
+	name_emp VARCHAR(60) NOT NULL,
+	department VARCHAR(60) REFERENCES Department(title),
+	chief INTEGER REFERENCES Employee(id)
+);
+CREATE TABLE IF NOT EXISTS EmployeeChief(
+	id_emp INTEGER NOT NULL REFERENCES Employee(id),
+	id_chief INTEGER NOT NULL REFERENCES Employee(id),
+	CONSTRAINT emp_chi PRIMARY KEY (id_emp, id_chief)
+);
